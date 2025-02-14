@@ -15,6 +15,17 @@ export class GifsService {
     return [...this._tagsHistory];
   }
 
+  setTagsHistory(tags: string[]) {
+    sessionStorage.setItem('tags', JSON.stringify(tags));
+  }
+
+  getTagsHistory() {
+    if (sessionStorage.getItem('tags')) {
+      const tags = sessionStorage.getItem('tags');
+      this._tagsHistory = tags ? JSON.parse(tags) : [];
+    }
+  }
+
   private organizeHistory(tag: string) {
     tag = tag.toLowerCase();
 
@@ -47,5 +58,8 @@ export class GifsService {
         this.gifList = result.data;
         console.log(this.gifList);
       });
+
+
+      this.setTagsHistory(this._tagsHistory);
   }
 }
