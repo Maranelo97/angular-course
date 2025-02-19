@@ -10,13 +10,17 @@ export class SearchBoxComponent {
   @ViewChild('txtTagInput')
   public tagInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private gifs: GifsService) {}
 
+  constructor( private gifsService: GifsService ) { }
+
+
+  // searchTag( newTag: string ) {
   searchTag() {
     const newTag = this.tagInput.nativeElement.value;
 
-    this.gifs.searchTag(newTag);
+    this.gifsService.searchTag(newTag);
 
     this.tagInput.nativeElement.value = '';
+
   }
 }
